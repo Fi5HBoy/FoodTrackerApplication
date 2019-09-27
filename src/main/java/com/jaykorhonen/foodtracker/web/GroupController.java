@@ -1,7 +1,7 @@
 package com.jaykorhonen.foodtracker.web;
 
-import com.jaykorhonen.foodtracker.model.Group;
-import com.jaykorhonen.foodtracker.model.GroupRepository;
+import com.jaykorhonen.foodtracker.model.group.Group;
+import com.jaykorhonen.foodtracker.model.group.GroupRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

@@ -1,5 +1,7 @@
-package com.jaykorhonen.foodtracker.model;
+package com.jaykorhonen.foodtracker.model.group;
 
+import com.jaykorhonen.foodtracker.model.Event;
+import com.jaykorhonen.foodtracker.model.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;

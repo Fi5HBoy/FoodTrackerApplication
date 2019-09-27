@@ -1,8 +1,8 @@
 package com.jaykorhonen.foodtracker;
 
 import com.jaykorhonen.foodtracker.model.Event;
-import com.jaykorhonen.foodtracker.model.Group;
-import com.jaykorhonen.foodtracker.model.GroupRepository;
+import com.jaykorhonen.foodtracker.model.group.Group;
+import com.jaykorhonen.foodtracker.model.group.GroupRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 

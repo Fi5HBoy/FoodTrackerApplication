@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="13135508-cf2c-4af6-b9fe-a1dac90bfb98" name="Default Changelist" comment="" />
+    <list default="true" id="13135508-cf2c-4af6-b9fe-a1dac90bfb98" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/jaykorhonen/foodtracker/model/INutritionInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/jaykorhonen/foodtracker/model/food/Food.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/jaykorhonen/foodtracker/model/ingredient/Ingredient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/jaykorhonen/foodtracker/model/meal/Meal.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/jaykorhonen/foodtracker/model/menuitem/MenuItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jaykorhonen/foodtracker/Initializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jaykorhonen/foodtracker/Initializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jaykorhonen/foodtracker/model/Group.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jaykorhonen/foodtracker/model/group/Group.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jaykorhonen/foodtracker/model/GroupRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jaykorhonen/foodtracker/model/group/GroupRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jaykorhonen/foodtracker/web/GroupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jaykorhonen/foodtracker/web/GroupController.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -11,12 +24,18 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Kotlin Interface" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1Qd4Iky6x7mpAF7Qvb2p6ESfh0G" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
@@ -69,5 +88,29 @@
       <updated>1568087061386</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../FoodTrackerCLI/FoodTracker.java</url>
+          <line>1183</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
