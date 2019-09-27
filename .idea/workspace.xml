@@ -2,18 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="13135508-cf2c-4af6-b9fe-a1dac90bfb98" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/jaykorhonen/foodtracker/model/INutritionInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/jaykorhonen/foodtracker/model/food/Food.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/jaykorhonen/foodtracker/model/ingredient/Ingredient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/jaykorhonen/foodtracker/model/meal/Meal.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/jaykorhonen/foodtracker/model/menuitem/MenuItem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/jaykorhonen/foodtracker/model/exceptions/CorruptedFileException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/jaykorhonen/foodtracker/model/food/FoodController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/jaykorhonen/foodtracker/model/food/FoodRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jaykorhonen/foodtracker/Initializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jaykorhonen/foodtracker/Initializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jaykorhonen/foodtracker/model/Group.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jaykorhonen/foodtracker/model/group/Group.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jaykorhonen/foodtracker/model/GroupRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jaykorhonen/foodtracker/model/group/GroupRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jaykorhonen/foodtracker/web/GroupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jaykorhonen/foodtracker/web/GroupController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jaykorhonen/foodtracker/model/food/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jaykorhonen/foodtracker/model/food/Food.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,8 +18,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Kotlin Interface" />
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>

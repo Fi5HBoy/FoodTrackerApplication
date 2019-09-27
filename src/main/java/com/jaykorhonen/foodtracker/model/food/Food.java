@@ -1,6 +1,17 @@
 package com.jaykorhonen.foodtracker.model.food;
 
+import lombok.NonNull;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 public class Food {
+
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @NonNull
     private String name;
     private double cals;
     private double fat;
@@ -83,5 +94,9 @@ public class Food {
                 carbs + "\t" +
                 protein + "\t" +
                 servingSize;
+    }
+
+    public Long getId() {
+        return id;
     }
 }
