@@ -1,10 +1,14 @@
 package com.jaykorhonen.foodtracker.model.food;
 
+import lombok.Data;
 import lombok.NonNull;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+@Data
+@Entity
 public class Food {
 
     @Id
@@ -13,15 +17,13 @@ public class Food {
 
     @NonNull
     private String name;
-    private double cals;
     private double fat;
     private double carbs;
     private double protein;
     private double servingSize;
 
-    Food(String name, double cals, double fat, double carbs, double protein, double servingSize) {
+    public Food(String name, double fat, double carbs, double protein, double servingSize) {
         this.name = name;
-        this.cals = cals;
         this.fat = fat;
         this.carbs = carbs;
         this.protein = protein;
@@ -37,11 +39,7 @@ public class Food {
     }
 
     private double getCals() {
-        return cals;
-    }
-
-    void setCals(double cals) {
-        this.cals = cals;
+        return CalculateCalories(this, this.servingSize);
     }
 
     double getFat() {
@@ -89,7 +87,7 @@ public class Food {
     @Override
     public String toString() {
         return name + "\t" +
-                cals + "\t" +
+                this.getCals() + "\t" +
                 fat + "\t" +
                 carbs + "\t" +
                 protein + "\t" +

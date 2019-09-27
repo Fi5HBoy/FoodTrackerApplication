@@ -2,12 +2,17 @@ package com.jaykorhonen.foodtracker.model.menuitem;
 
 import com.jaykorhonen.foodtracker.model.ingredient.*;
 import com.jaykorhonen.foodtracker.model.food.*;
+import lombok.Data;
 import lombok.NonNull;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.List;
 
+@Data
+@Entity
 public class MenuItem {
 
     @Id
@@ -16,8 +21,10 @@ public class MenuItem {
 
     @NonNull
     private String name;
-    private List<Ingredient> ingredients;
     private double totalCalories;
+
+    @OneToMany
+    private List<Ingredient> ingredients;
 
     MenuItem(String name, List<Ingredient> ingredients) {
         this.name = name;

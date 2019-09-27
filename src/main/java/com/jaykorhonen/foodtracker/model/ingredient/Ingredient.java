@@ -1,11 +1,21 @@
 package com.jaykorhonen.foodtracker.model.ingredient;
 
 import com.jaykorhonen.foodtracker.model.food.*;
+import lombok.Data;
 
+import javax.persistence.*;
+
+@Data
+@Entity
 public class Ingredient {
 
-    private final Food food;
+    @Id
+    @GeneratedValue
+    private Long id;
     private double weight;
+
+    @OneToOne
+    private Food food;
 
     Ingredient(Food food, double weight) {
         this.food = food;

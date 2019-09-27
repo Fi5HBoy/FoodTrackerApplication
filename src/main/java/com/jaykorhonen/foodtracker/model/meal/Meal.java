@@ -1,13 +1,18 @@
 package com.jaykorhonen.foodtracker.model.meal;
 
 import com.jaykorhonen.foodtracker.model.menuitem.MenuItem;
+import lombok.Data;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
+@Data
+@Entity
 public class Meal {
 
     @Id
@@ -17,8 +22,10 @@ public class Meal {
     @NotNull
     private Date mealDate;
     private String mealType;
-    private List<MenuItem> mealItems;
     private double totalCalories;
+
+    @OneToMany
+    private List<MenuItem> mealItems;
 
     Meal(Date mealDate, String mealType, List<MenuItem> mealItems, double totalCalories) {
         this.mealType = mealType;

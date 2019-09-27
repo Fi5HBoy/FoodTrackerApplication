@@ -2,6 +2,7 @@ package com.jaykorhonen.foodtracker.model.meal;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface MealRepository extends JpaRepository<Meal, Long> {
+//TODO: this is wrong
+public interface MealRepositoryImpl extends JpaRepository<Meal, Long> {
     Meal findByName(String name);
 }
