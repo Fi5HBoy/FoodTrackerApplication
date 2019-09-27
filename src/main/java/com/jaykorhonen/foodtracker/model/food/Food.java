@@ -22,6 +22,14 @@ public class Food {
     private double protein;
     private double servingSize;
 
+    public Food(){
+        this.name = "name";
+        this.fat = 0;
+        this.carbs = 0;
+        this.protein = 0;
+        this.servingSize = 0;
+    }
+
     public Food(String name, double fat, double carbs, double protein, double servingSize) {
         this.name = name;
         this.fat = fat;
@@ -38,11 +46,11 @@ public class Food {
         this.name = name;
     }
 
-    private double getCals() {
-        return CalculateCalories(this, this.servingSize);
+    public double getCals() {
+        return (9*fat) + 4*(carbs + protein);
     }
 
-    double getFat() {
+    public double getFat() {
         return fat;
     }
 
@@ -50,7 +58,7 @@ public class Food {
         this.fat = fat;
     }
 
-    double getCarbs() {
+    public double getCarbs() {
         return carbs;
     }
 
@@ -58,7 +66,7 @@ public class Food {
         this.carbs = carbs;
     }
 
-    double getProtein() {
+    public double getProtein() {
         return protein;
     }
 

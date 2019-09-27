@@ -17,20 +17,20 @@ import java.util.Optional;
 public class MealController {
 
     private final Logger log = LoggerFactory.getLogger(MealController.class);
-    private MealRepositoryImpl mealRepositoryImpl;
+    private MealRepository mealRepositoryCustom;
 
-    public MealController(MealRepositoryImpl mealRepositoryImpl) {
-        this.mealRepositoryImpl = mealRepositoryImpl;
+    public MealController(MealRepository mealRepositoryCustom) {
+        this.mealRepositoryCustom = mealRepositoryCustom;
     }
 
     @GetMapping("/meals")
     List<Meal> meals() {
-        return mealRepositoryImpl.findAll();
+        return mealRepositoryCustom.findAll();
     }
 
     @GetMapping("/meal/{id}")
     ResponseEntity<?> getMeal(@PathVariable Long id) {
-        Optional<Meal> meal = mealRepositoryImpl.findById(id);
+        Optional<Meal> meal = mealRepositoryCustom.findById(id);
         return meal.map(response -> ResponseEntity.ok().body(response))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
@@ -38,7 +38,7 @@ public class MealController {
     @PostMapping("/meal")
     ResponseEntity<Meal> createMeal(@Valid @RequestBody Meal meal) throws URISyntaxException {
         log.info("Request to create meal: {}", meal);
-        Meal result = mealRepositoryImpl.save(meal);
+        Meal result = mealRepositoryCustom.save(meal);
         return ResponseEntity.created(new URI("/api/meal/" + result.getId()))
                 .body(result);
     }
@@ -46,14 +46,14 @@ public class MealController {
     @PutMapping("/meal/{id}")
     ResponseEntity<Meal> updateMeal(@Valid @RequestBody Meal meal) {
         log.info("Request to update meal: {}", meal);
-        Meal result = mealRepositoryImpl.save(meal);
+        Meal result = mealRepositoryCustom.save(meal);
         return ResponseEntity.ok().body(result);
     }
 
     @DeleteMapping("/meal/{id}")
     public ResponseEntity<?> deleteMeal(@PathVariable Long id) {
         log.info("Request to delete meal: {}", id);
-        mealRepositoryImpl.deleteById(id);
+        mealRepositoryCustom.deleteById(id);
         return ResponseEntity.ok().build();
     }
 }
