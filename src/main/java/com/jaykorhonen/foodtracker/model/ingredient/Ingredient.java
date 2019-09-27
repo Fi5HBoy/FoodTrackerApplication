@@ -3,6 +3,7 @@ package com.jaykorhonen.foodtracker.model.ingredient;
 import com.jaykorhonen.foodtracker.model.food.*;
 
 public class Ingredient {
+
     private final Food food;
     private double weight;
 

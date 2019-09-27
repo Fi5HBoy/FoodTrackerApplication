@@ -2,10 +2,19 @@ package com.jaykorhonen.foodtracker.model.meal;
 
 import com.jaykorhonen.foodtracker.model.menuitem.MenuItem;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
 public class Meal {
+
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @NotNull
     private Date mealDate;
     private String mealType;
     private List<MenuItem> mealItems;
@@ -32,5 +41,9 @@ public class Meal {
 
     double getTotalCalories() {
         return totalCalories;
+    }
+
+    public Long getId() {
+        return this.id;
     }
 }
