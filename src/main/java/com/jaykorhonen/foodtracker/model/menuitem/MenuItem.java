@@ -2,10 +2,19 @@ package com.jaykorhonen.foodtracker.model.menuitem;
 
 import com.jaykorhonen.foodtracker.model.ingredient.*;
 import com.jaykorhonen.foodtracker.model.food.*;
+import lombok.NonNull;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.List;
 
 public class MenuItem {
+
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @NonNull
     private String name;
     private List<Ingredient> ingredients;
     private double totalCalories;
@@ -88,5 +97,9 @@ public class MenuItem {
         s = new StringBuilder(s.substring(0, s.length() - 2));
         s.append(" | ").append(totalCalories).append(" calories");
         return s.toString();
+    }
+
+    public Long getId() {
+        return id;
     }
 }

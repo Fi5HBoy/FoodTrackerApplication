@@ -30,23 +30,23 @@ public class MealController {
 
     @GetMapping("/meal/{id}")
     ResponseEntity<?> getMeal(@PathVariable Long id) {
-        Optional<Meal> food = mealRepository.findById(id);
-        return food.map(response -> ResponseEntity.ok().body(response))
+        Optional<Meal> meal = mealRepository.findById(id);
+        return meal.map(response -> ResponseEntity.ok().body(response))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping("/meal")
-    ResponseEntity<Meal> createMeal(@Valid @RequestBody Meal food) throws URISyntaxException {
-        log.info("Request to create food: {}", food);
-        Meal result = mealRepository.save(food);
+    ResponseEntity<Meal> createMeal(@Valid @RequestBody Meal meal) throws URISyntaxException {
+        log.info("Request to create meal: {}", meal);
+        Meal result = mealRepository.save(meal);
         return ResponseEntity.created(new URI("/api/meal/" + result.getId()))
                 .body(result);
     }
 
     @PutMapping("/meal/{id}")
-    ResponseEntity<Meal> updateMeal(@Valid @RequestBody Meal food) {
-        log.info("Request to update food: {}", food);
-        Meal result = mealRepository.save(food);
+    ResponseEntity<Meal> updateMeal(@Valid @RequestBody Meal meal) {
+        log.info("Request to update meal: {}", meal);
+        Meal result = mealRepository.save(meal);
         return ResponseEntity.ok().body(result);
     }
 
