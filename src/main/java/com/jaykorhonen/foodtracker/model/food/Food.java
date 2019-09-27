@@ -2,18 +2,13 @@ package com.jaykorhonen.foodtracker.model.food;
 
 import lombok.Data;
 import lombok.NonNull;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import org.springframework.data.annotation.Id;
 
 @Data
-@Entity
 public class Food {
 
     @Id
-    @GeneratedValue
-    private Long id;
+    private String id;
 
     @NonNull
     private String name;
@@ -102,7 +97,7 @@ public class Food {
                 servingSize;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 }

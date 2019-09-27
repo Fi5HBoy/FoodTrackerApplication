@@ -4,26 +4,19 @@ import com.jaykorhonen.foodtracker.model.ingredient.*;
 import com.jaykorhonen.foodtracker.model.food.*;
 import lombok.Data;
 import lombok.NonNull;
+import org.springframework.data.annotation.Id;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import java.util.List;
 
 @Data
-@Entity
 public class MenuItem {
 
     @Id
-    @GeneratedValue
     private Long id;
 
     @NonNull
     private String name;
     private double totalCalories;
-
-    @OneToMany
     private List<Ingredient> ingredients;
 
     MenuItem(String name, List<Ingredient> ingredients) {

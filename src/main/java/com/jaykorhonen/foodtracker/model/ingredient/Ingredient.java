@@ -2,19 +2,14 @@ package com.jaykorhonen.foodtracker.model.ingredient;
 
 import com.jaykorhonen.foodtracker.model.food.*;
 import lombok.Data;
-
-import javax.persistence.*;
+import org.springframework.data.annotation.Id;
 
 @Data
-@Entity
 public class Ingredient {
 
     @Id
-    @GeneratedValue
     private Long id;
     private double weight;
-
-    @OneToOne
     private Food food;
 
     Ingredient(Food food, double weight) {

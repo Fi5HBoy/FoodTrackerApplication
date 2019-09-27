@@ -1,6 +1,7 @@
 package com.jaykorhonen.foodtracker.model.meal;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface MealRepository extends JpaRepository<Meal, Long> {
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+public interface MealRepository extends MongoRepository<Meal, Long> {
 }
