@@ -6,7 +6,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
         import java.util.List;
 
-@RepositoryRestResource(collectionResourceRel = "foods", path = "foods")
-public interface FoodRepository extends MongoRepository<Food, Long> {
+@RepositoryRestResource(collectionResourceRel = "food", path = "food")
+public interface FoodRepository extends MongoRepository<Food, String> {
     List<Food> findByName(@Param("name") String name);
 }

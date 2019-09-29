@@ -12,7 +12,7 @@ import java.util.List;
 public class MenuItem {
 
     @Id
-    private Long id;
+    private String id;
 
     @NonNull
     private String name;
@@ -99,7 +99,7 @@ public class MenuItem {
         return s.toString();
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 }

@@ -29,7 +29,7 @@ public class MenuItemController {
     }
 
     @GetMapping("/menuItem/{id}")
-    ResponseEntity<?> getMenuItem(@PathVariable Long id) {
+    ResponseEntity<?> getMenuItem(@PathVariable String id) {
         Optional<MenuItem> menuItem = menuItemRepository.findById(id);
         return menuItem.map(response -> ResponseEntity.ok().body(response))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -51,7 +51,7 @@ public class MenuItemController {
     }
 
     @DeleteMapping("/menuItem/{id}")
-    public ResponseEntity<?> deleteMenuItem(@PathVariable Long id) {
+    public ResponseEntity<?> deleteMenuItem(@PathVariable String id) {
         log.info("Request to delete menuItem: {}", id);
         menuItemRepository.deleteById(id);
         return ResponseEntity.ok().build();

@@ -23,13 +23,13 @@ public class FoodController {
         this.foodRepository = foodRepository;
     }
 
-    @GetMapping("/foods")
+    @GetMapping("/food")
     List<Food> foods() {
         return foodRepository.findAll();
     }
 
     @GetMapping("/food/{id}")
-    ResponseEntity<?> getFood(@PathVariable Long id) {
+    ResponseEntity<?> getFood(@PathVariable String id) {
         Optional<Food> food = foodRepository.findById(id);
         return food.map(response -> ResponseEntity.ok().body(response))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -51,7 +51,7 @@ public class FoodController {
     }
 
     @DeleteMapping("/food/{id}")
-    public ResponseEntity<?> deleteFood(@PathVariable Long id) {
+    public ResponseEntity<?> deleteFood(@PathVariable String id) {
         log.info("Request to delete food: {}", id);
         foodRepository.deleteById(id);
         return ResponseEntity.ok().build();

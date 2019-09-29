@@ -12,7 +12,7 @@ import java.util.List;
 public class Meal {
 
     @Id
-    private Long id;
+    private String id;
 
     @NotNull
     private Date mealDate;
@@ -43,7 +43,7 @@ public class Meal {
         return totalCalories;
     }
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 }

@@ -17,20 +17,20 @@ import java.util.Optional;
 public class MealController {
 
     private final Logger log = LoggerFactory.getLogger(MealController.class);
-    private MealRepository mealRepositoryCustom;
+    private MealRepository mealRepository;
 
-    public MealController(MealRepository mealRepositoryCustom) {
-        this.mealRepositoryCustom = mealRepositoryCustom;
+    public MealController(MealRepository mealRepository) {
+        this.mealRepository = mealRepository;
     }
 
     @GetMapping("/meals")
     List<Meal> meals() {
-        return mealRepositoryCustom.findAll();
+        return mealRepository.findAll();
     }
 
     @GetMapping("/meal/{id}")
-    ResponseEntity<?> getMeal(@PathVariable Long id) {
-        Optional<Meal> meal = mealRepositoryCustom.findById(id);
+    ResponseEntity<?> getMeal(@PathVariable String id) {
+        Optional<Meal> meal = mealRepository.findById(id);
         return meal.map(response -> ResponseEntity.ok().body(response))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
@@ -38,7 +38,7 @@ public class MealController {
     @PostMapping("/meal")
     ResponseEntity<Meal> createMeal(@Valid @RequestBody Meal meal) throws URISyntaxException {
         log.info("Request to create meal: {}", meal);
-        Meal result = mealRepositoryCustom.save(meal);
+        Meal result = mealRepository.save(meal);
         return ResponseEntity.created(new URI("/api/meal/" + result.getId()))
                 .body(result);
     }
@@ -46,14 +46,14 @@ public class MealController {
     @PutMapping("/meal/{id}")
     ResponseEntity<Meal> updateMeal(@Valid @RequestBody Meal meal) {
         log.info("Request to update meal: {}", meal);
-        Meal result = mealRepositoryCustom.save(meal);
+        Meal result = mealRepository.save(meal);
         return ResponseEntity.ok().body(result);
     }
 
     @DeleteMapping("/meal/{id}")
-    public ResponseEntity<?> deleteMeal(@PathVariable Long id) {
+    public ResponseEntity<?> deleteMeal(@PathVariable String id) {
         log.info("Request to delete meal: {}", id);
-        mealRepositoryCustom.deleteById(id);
+        mealRepository.deleteById(id);
         return ResponseEntity.ok().build();
     }
 }
