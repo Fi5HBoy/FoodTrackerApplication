@@ -5,7 +5,7 @@ import lombok.NonNull;
 import org.springframework.data.annotation.Id;
 
 @Data
-public class Food {
+public class Food implements IFood {
 
     @Id
     private String id;
@@ -41,7 +41,7 @@ public class Food {
         this.name = name;
     }
 
-    public double getCals() {
+    public double getCalories() {
         return (9*fat) + 4*(carbs + protein);
     }
 
@@ -69,32 +69,12 @@ public class Food {
         this.protein = protein;
     }
 
-    private double getServingSize() {
+    double getServingSize() {
         return servingSize;
     }
 
     void setServingSize(double servingSize) {
         this.servingSize = servingSize;
-    }
-
-    public static double CalculateCalories(Food food, double weight) {
-        if (food == null) {
-            return 0;
-        }
-
-        double servingSize = food.getServingSize();
-        double servings = weight / servingSize;
-        return servings * food.getCals();
-    }
-
-    @Override
-    public String toString() {
-        return name + "\t" +
-                this.getCals() + "\t" +
-                fat + "\t" +
-                carbs + "\t" +
-                protein + "\t" +
-                servingSize;
     }
 
     public String getId() {

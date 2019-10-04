@@ -26,7 +26,7 @@ public class MenuItem {
         for(Ingredient ingredient : ingredients) {
             Food food = ingredient.getFood();
             double weight = ingredient.getWeight();
-            this.totalCalories += Food.CalculateCalories(food, weight);
+            this.totalCalories += IFood.CalculateCalories(food, weight);
         }
     }
 
@@ -57,7 +57,7 @@ public class MenuItem {
         this.ingredients.add(ingredient);
         Food food = ingredient.getFood();
         double weight = ingredient.getWeight();
-        this.totalCalories += Food.CalculateCalories(food, weight);
+        this.totalCalories += IFood.CalculateCalories(food, weight);
     }
 
     void removeIngredient(Ingredient ingredient) {
@@ -68,7 +68,7 @@ public class MenuItem {
 
         //This will never return false the way it is currently used, but may if this method is used a different way later.
         if (this.ingredients.remove(ingredient)) {
-            this.totalCalories -= Food.CalculateCalories(food, weight);
+            this.totalCalories -= IFood.CalculateCalories(food, weight);
         }
 
     }

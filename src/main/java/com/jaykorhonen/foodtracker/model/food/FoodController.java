@@ -1,5 +1,7 @@
 package com.jaykorhonen.foodtracker.model.food;
 
+import com.jaykorhonen.foodtracker.model.food.exceptions.FoodAlreadyExistsException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -13,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/food")
 public class FoodController {
 
     private final Logger log = LoggerFactory.getLogger(FoodController.class);
@@ -23,12 +25,12 @@ public class FoodController {
         this.foodRepository = foodRepository;
     }
 
-    @GetMapping("/food")
+    @GetMapping
     List<Food> foods() {
         return foodRepository.findAll();
     }
 
-    @GetMapping("/food/{id}")
+    @GetMapping(value = "/food/{id}")
     ResponseEntity<?> getFood(@PathVariable String id) {
         Optional<Food> food = foodRepository.findById(id);
         return food.map(response -> ResponseEntity.ok().body(response))
@@ -36,8 +38,12 @@ public class FoodController {
     }
 
     @PostMapping("/food")
-    ResponseEntity<Food> createFood(@Valid @RequestBody Food food) throws URISyntaxException {
+    ResponseEntity<Food> createFood(@Valid @RequestBody Food food) throws URISyntaxException, FoodAlreadyExistsException {
         log.info("Request to create food: {}", food);
+        if(foodRepository.existsByName(food.getName())){
+            throw new FoodAlreadyExistsException(food);
+        }
+
         Food result = foodRepository.save(food);
         return ResponseEntity.created(new URI("/api/food/" + result.getId()))
                 .body(result);
