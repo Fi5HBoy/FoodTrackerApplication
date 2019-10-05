@@ -1,4 +1,4 @@
-package com.jaykorhonen.foodtracker.model.food.exceptions;
+package com.jaykorhonen.foodtracker.model.ingredient.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

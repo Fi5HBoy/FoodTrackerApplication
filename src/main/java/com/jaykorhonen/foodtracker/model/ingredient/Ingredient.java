@@ -1,36 +1,16 @@
 package com.jaykorhonen.foodtracker.model.ingredient;
 
-import com.jaykorhonen.foodtracker.model.food.*;
-import lombok.Data;
-import org.springframework.data.annotation.Id;
+public class Ingredient extends IngredientBase {
 
-@Data
-public class Ingredient {
-
-    @Id
-    private Long id;
-    private double weight;
-    private Food food;
-
-    Ingredient(Food food, double weight) {
-        this.food = food;
-        this.weight = weight;
+    public Ingredient(){
+        super();
     }
 
-    public Food getFood() {
-        return food;
-    }
-
-    public double getWeight() {
-        return weight;
-    }
-
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
-
-    @Override
-    public String toString() {
-        return food + "\t" + weight;
+    public Ingredient(String name, double fat, double carbs, double protein, double servingSize) {
+        this.name = name;
+        this.fat = fat;
+        this.carbs = carbs;
+        this.protein = protein;
+        this.servingSize = servingSize;
     }
 }
