@@ -1,6 +1,6 @@
 package com.jaykorhonen.foodtracker.model.meal;
 
-import com.jaykorhonen.foodtracker.model.menuitem.MenuItem;
+import com.jaykorhonen.foodtracker.model.serving.Serving;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -21,11 +21,11 @@ public class Meal {
     private double totalCalories;
 
     @DBRef
-    private List<MenuItem> mealItems;
+    private List<Serving> servings;
 
-    Meal(Date mealDate, String mealType, List<MenuItem> mealItems, double totalCalories) {
+    Meal(Date mealDate, String mealType, List<Serving> servings, double totalCalories) {
         this.mealType = mealType;
-        this.mealItems = mealItems;
+        this.servings = servings;
         this.mealDate = mealDate;
         this.totalCalories = totalCalories;
     }
