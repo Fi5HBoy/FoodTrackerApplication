@@ -1,5 +1,7 @@
 package com.jaykorhonen.foodtracker.model.ingredient;
 
+import lombok.Data;
+
 public class Ingredient extends IngredientBase {
 
     public Ingredient(){

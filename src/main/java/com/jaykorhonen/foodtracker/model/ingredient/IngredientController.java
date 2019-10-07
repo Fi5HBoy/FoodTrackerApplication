@@ -20,7 +20,7 @@ public class IngredientController {
     }
 
     @GetMapping
-    List<IngredientBase> foods() {
+    List<IngredientBase> ingredients() {
         return ingredientRepository.findAll();
     }
 }
