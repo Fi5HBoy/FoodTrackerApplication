@@ -19,6 +19,7 @@ public class IngredientController {
         this.ingredientRepository = ingredientRepository;
     }
 
+    @CrossOrigin(origins = 'http://localhost:3000')
     @GetMapping
     List<IngredientBase> ingredients() {
         return ingredientRepository.findAll();
