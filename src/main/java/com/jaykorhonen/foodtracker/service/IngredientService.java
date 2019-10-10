@@ -44,8 +44,8 @@ public class IngredientService implements IngredientServiceBase {
 
     @Override
     public List<IngredientDTO> findAll() {
-        List<Ingredient> todoEntries = ingredientRepository.findAll();
-        return convertToDTOs(todoEntries);
+        List<Ingredient> ingredientEntries = ingredientRepository.findAll();
+        return convertToDTOs(ingredientEntries);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class IngredientService implements IngredientServiceBase {
     }
 
     @Override
-    public IngredientDTO update(IngredientDTO todo) {
+    public IngredientDTO update(IngredientDTO ingredientDTO) {
         return null;
     }
 
