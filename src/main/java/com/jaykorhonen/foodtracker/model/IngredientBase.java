@@ -1,24 +1,16 @@
-package com.jaykorhonen.foodtracker.model.ingredient;
+package com.jaykorhonen.foodtracker.model;
 
-import lombok.Data;
-import lombok.NonNull;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Field;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
-public abstract class IngredientBase {
+@SuperBuilder
+@NoArgsConstructor
+abstract class IngredientBase extends NamedEntity {
 
-    public IngredientBase(){
-        this.name = "name";
-        this.fat = 0;
-        this.carbs = 0;
-        this.protein = 0;
-        this.servingSize = 0;
-    }
-
-    @Id
-    private String id;
-
-    @NonNull String name;
     double fat;
     double carbs;
     double protein;
