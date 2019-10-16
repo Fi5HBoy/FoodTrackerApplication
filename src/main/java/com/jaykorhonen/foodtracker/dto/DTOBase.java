@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Data
-abstract class DTOBase {
+public abstract class DTOBase {
 
     private Long id;
 }

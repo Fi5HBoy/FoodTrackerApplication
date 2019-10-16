@@ -1,6 +1,7 @@
 package com.jaykorhonen.foodtracker.service;
 
 import com.jaykorhonen.foodtracker.dto.IngredientDTO;
+import com.jaykorhonen.foodtracker.dto.NamedDTO;
 import com.jaykorhonen.foodtracker.exceptions.IngredientAlreadyExistsException;
 import com.jaykorhonen.foodtracker.exceptions.IngredientNotFoundException;
 import com.jaykorhonen.foodtracker.model.Ingredient;
@@ -14,7 +15,7 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 
 @Service
-public class IngredientService implements IngredientServiceBase {
+public class IngredientService implements NamedEntityService<IngredientDTO> {
 
     private final IngredientRepository ingredientRepository;
 
@@ -128,6 +129,20 @@ public class IngredientService implements IngredientServiceBase {
         persistedIngredient = ingredientRepository.save(persistedIngredient);
 
         return convertToDTO(persistedIngredient);
+    }
+
+    public IngredientDTO findByName(String name) throws IngredientNotFoundException {
+        Ingredient ingredient = ingredientRepository.findByName(name);
+
+        if(ingredient == null) {
+            throw new IngredientNotFoundException(name);
+        }
+
+        return convertToDTO(ingredient);
+    }
+
+    public IngredientDTO deleteByName(String name) {
+        return null;
     }
 
     private IngredientDTO convertToDTO(Ingredient model) {

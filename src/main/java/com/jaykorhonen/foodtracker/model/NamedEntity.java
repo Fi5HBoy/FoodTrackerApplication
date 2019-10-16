@@ -9,7 +9,7 @@ import lombok.experimental.SuperBuilder;
 @Data
 @SuperBuilder
 @NoArgsConstructor
-abstract class NamedEntity extends EntityBase {
+public abstract class NamedEntity extends EntityBase {
 
     String name;
 }

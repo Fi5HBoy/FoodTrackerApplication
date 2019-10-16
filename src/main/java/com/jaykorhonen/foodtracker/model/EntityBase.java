@@ -8,7 +8,7 @@ import org.springframework.data.annotation.Id;
 @Data
 @SuperBuilder
 @NoArgsConstructor
-abstract class EntityBase {
+public abstract class EntityBase {
 
     @Id
     Long id;
