@@ -34,7 +34,7 @@ public class IngredientService implements IngredientServiceBase {
         if(ingredient.getId() != null) {
             throw new InvalidAttributeIdentifierException("Illegal attribute: id");
         }
-        
+
         existingIngredient = ingredientRepository.findByName(ingredient.getName());
         if(existingIngredient != null) {
             throw new IngredientAlreadyExistsException(existingIngredient);
