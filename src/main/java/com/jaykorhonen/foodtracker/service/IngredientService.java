@@ -131,6 +131,9 @@ public class IngredientService implements NamedEntityService<IngredientDTO> {
         return convertToDTO(persistedIngredient);
     }
 
+    /*
+    * Return ingredient with given name
+    * */
     public IngredientDTO findByName(String name) throws IngredientNotFoundException {
         Ingredient ingredient = ingredientRepository.findByName(name);
 
@@ -141,8 +144,14 @@ public class IngredientService implements NamedEntityService<IngredientDTO> {
         return convertToDTO(ingredient);
     }
 
+    /*
+    * Delete ingredient with given name, return deleted ingredient
+    * */
     public IngredientDTO deleteByName(String name) {
-        return null;
+        IngredientDTO dto = findByName(name);
+        dto = delete(dto.getId());
+
+        return dto;
     }
 
     private IngredientDTO convertToDTO(Ingredient model) {
