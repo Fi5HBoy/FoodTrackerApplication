@@ -1,18 +1,18 @@
 package com.jaykorhonen.foodtracker.service;
 
-import com.jaykorhonen.foodtracker.dto.IngredientDTO;
+import com.jaykorhonen.foodtracker.dto.NamedDTO;
 
 import java.util.List;
 
-public interface ServiceBase {
+public interface ServiceBase<T extends NamedDTO> {
 
-    IngredientDTO create(IngredientDTO ingredientDTO);
+    T create(T dto);
 
-    IngredientDTO delete(String id);
+    T delete(String id);
 
-    List<IngredientDTO> findAll();
+    List<T> findAll();
 
-    IngredientDTO findById(String id);
+    T findById(String id);
 
-    IngredientDTO update(IngredientDTO ingredientDTO);
+    T update(T dto);
 }

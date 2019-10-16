@@ -20,7 +20,6 @@ public class IngredientService implements IngredientServiceBase {
         this.ingredientRepository = ingredientRepository;
     }
 
-    @Override
     public IngredientDTO create(IngredientDTO ingredient) {
         Ingredient persistedIngredient = Ingredient.builder()
                 .name(ingredient.getName())
@@ -37,23 +36,19 @@ public class IngredientService implements IngredientServiceBase {
         }
     }
 
-    @Override
     public IngredientDTO delete(String id) {
         return null;
     }
 
-    @Override
     public List<IngredientDTO> findAll() {
         List<Ingredient> ingredientEntries = ingredientRepository.findAll();
         return convertToDTOs(ingredientEntries);
     }
 
-    @Override
     public IngredientDTO findById(String id) {
         return null;
     }
 
-    @Override
     public IngredientDTO update(IngredientDTO ingredientDTO) {
         return null;
     }
