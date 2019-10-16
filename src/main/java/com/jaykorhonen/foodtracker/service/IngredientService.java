@@ -1,11 +1,14 @@
 package com.jaykorhonen.foodtracker.service;
 
 import com.jaykorhonen.foodtracker.dto.IngredientDTO;
+import com.jaykorhonen.foodtracker.exceptions.IngredientAlreadyExistsException;
+import com.jaykorhonen.foodtracker.exceptions.IngredientNotFoundException;
 import com.jaykorhonen.foodtracker.model.Ingredient;
 import com.jaykorhonen.foodtracker.repository.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.naming.directory.InvalidAttributeIdentifierException;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -20,7 +23,23 @@ public class IngredientService implements IngredientServiceBase {
         this.ingredientRepository = ingredientRepository;
     }
 
-    public IngredientDTO create(IngredientDTO ingredient) {
+    /*
+    * Create ingredient, returns the saved ingredient
+    * throws if ingredient already exists
+    * */
+    public IngredientDTO create(IngredientDTO ingredient) throws IngredientAlreadyExistsException, InvalidAttributeIdentifierException {
+
+        Ingredient existingIngredient;
+
+        if(ingredient.getId() != null) {
+            throw new InvalidAttributeIdentifierException("Illegal attribute: id");
+        }
+        
+        existingIngredient = ingredientRepository.findByName(ingredient.getName());
+        if(existingIngredient != null) {
+            throw new IngredientAlreadyExistsException(existingIngredient);
+        }
+
         Ingredient persistedIngredient = Ingredient.builder()
                 .name(ingredient.getName())
                 .fat(ingredient.getFat())
@@ -29,40 +48,100 @@ public class IngredientService implements IngredientServiceBase {
                 .servingSize(ingredient.getServingSize())
                 .build();
         persistedIngredient = ingredientRepository.save(persistedIngredient);
-        if(persistedIngredient != null) {
-            return convertToDTO(persistedIngredient);
-        } else {
-            return new IngredientDTO();
+
+        return convertToDTO(persistedIngredient);
+    }
+
+    /*
+    * Delete ingredient if it exists, return ingredient deleted
+    * */
+    public IngredientDTO delete(Long id) {
+        Ingredient ingredient = ingredientRepository.findById(id).orElse(null);
+
+        if(ingredient != null) {
+            ingredientRepository.deleteById(id);
         }
+
+        return convertToDTO(ingredient);
     }
 
-    public IngredientDTO delete(String id) {
-        return null;
-    }
-
+    /*
+    * Return a list of all ingredients
+    * */
     public List<IngredientDTO> findAll() {
         List<Ingredient> ingredientEntries = ingredientRepository.findAll();
+
         return convertToDTOs(ingredientEntries);
     }
 
-    public IngredientDTO findById(String id) {
-        return null;
+    /*
+    * Return ingredient with given id
+    * */
+    public IngredientDTO findById(Long id) {
+        Ingredient ingredient = ingredientRepository.findById(id).orElse(null);
+
+        return convertToDTO(ingredient);
     }
 
-    public IngredientDTO update(IngredientDTO ingredientDTO) {
-        return null;
+    /*
+    * Update existing ingredient, return ingredient with new attributes
+    * throws if ingredient does not exist */
+    public IngredientDTO update(IngredientDTO ingredient) throws IngredientNotFoundException {
+
+        Ingredient persistedIngredient;
+
+        Long id = ingredient.getId();
+        if(id != null) {
+
+            if(ingredientRepository.findById(id).orElse(null) == null) {
+                throw new IngredientNotFoundException(id);
+            }
+
+            persistedIngredient  = Ingredient.builder()
+                    .id(ingredient.getId())
+                    .name(ingredient.getName())
+                    .fat(ingredient.getFat())
+                    .carbs(ingredient.getCarbs())
+                    .protein(ingredient.getProtein())
+                    .servingSize(ingredient.getServingSize())
+                    .build();
+
+            persistedIngredient = ingredientRepository.save(persistedIngredient);
+        } else {
+            Ingredient ingredientWithId = ingredientRepository.findByName(ingredient.getName());
+
+            if(ingredientWithId == null) {
+                throw new IngredientNotFoundException(ingredient.getName());
+            }
+
+            persistedIngredient  = Ingredient.builder()
+                    .id(ingredientWithId.getId())
+                    .name(ingredient.getName())
+                    .fat(ingredient.getFat())
+                    .carbs(ingredient.getCarbs())
+                    .protein(ingredient.getProtein())
+                    .servingSize(ingredient.getServingSize())
+                    .build();
+
+            persistedIngredient = ingredientRepository.save(persistedIngredient);
+        }
+        persistedIngredient = ingredientRepository.save(persistedIngredient);
+
+        return convertToDTO(persistedIngredient);
     }
 
     private IngredientDTO convertToDTO(Ingredient model) {
         IngredientDTO dto = new IngredientDTO();
 
-        dto.setId(model.getId());
-        dto.setName(model.getName());
-        dto.setFat(model.getFat());
-        dto.setCarbs(model.getCarbs());
-        dto.setProtein(model.getProtein());
-        dto.setServingSize(model.getServingSize());
-        dto.setCalories(model.getCalories());
+        if(model != null) {
+            dto.setId(model.getId());
+            dto.setName(model.getName());
+            dto.setFat(model.getFat());
+            dto.setCarbs(model.getCarbs());
+            dto.setProtein(model.getProtein());
+            dto.setServingSize(model.getServingSize());
+            dto.setCalories(model.getCalories());
+        }
 
         return dto;
     }

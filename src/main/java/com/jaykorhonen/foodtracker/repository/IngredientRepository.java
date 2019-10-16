@@ -1,14 +1,31 @@
 package com.jaykorhonen.foodtracker.repository;
 
 import com.jaykorhonen.foodtracker.model.Ingredient;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
-public interface IngredientRepository extends MongoRepository<Ingredient, String> {
-    List<Ingredient> findByName(@Param("name") String name);
-    boolean existsByName(@Param("name") String name);
+public interface IngredientRepository extends MongoRepository<Ingredient, Long> {
+
+    Ingredient findByName(@Param("name") String name);
+
+    @Override
+    Optional<Ingredient> findById(Long id);
+
     List<Ingredient> findAll();
-    <I extends com.jaykorhonen.foodtracker.model.Ingredient> I save(I saved);
+
+    @Override
+    Page<Ingredient> findAll(Pageable pageable);
+
+    <I extends Ingredient> I save(I saved);
+
+    @Override
+    boolean existsById(Long id);
+
+    @Override
+    void deleteById(Long id);
 }

@@ -7,5 +7,5 @@ import lombok.NoArgsConstructor;
 @Data
 abstract class DTOBase {
 
-    private String id;
+    private Long id;
 }

@@ -11,5 +11,5 @@ import org.springframework.data.annotation.Id;
 abstract class EntityBase {
 
     @Id
-    String id;
+    Long id;
 }
