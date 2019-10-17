@@ -11,10 +11,10 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public class Ingredient extends NamedEntity {
 
-    double fat;
-    double carbs;
-    double protein;
-    double servingSize;
+    private double fat;
+    private double carbs;
+    private double protein;
+    private double servingSize;
 
     public double getCalories() {
         return (9*fat) + 4*(carbs + protein);
