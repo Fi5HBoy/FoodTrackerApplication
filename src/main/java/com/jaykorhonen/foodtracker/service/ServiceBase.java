@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ServiceBase<T extends DTOBase, E extends EntityBase> {
 
-    T create(T dto) throws IngredientAlreadyExistsException, InvalidAttributeIdentifierException;
+    T create(T dto) throws RuntimeException;
 
     T delete(Long id);
 
@@ -17,5 +17,5 @@ public interface ServiceBase<T extends DTOBase, E extends EntityBase> {
 
     T findById(Long id);
 
-    T update(T dto);
+    T update(T dto) throws RuntimeException;
 }

@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @Data
-public final class IngredientDTO extends NamedDTO {
+public class IngredientDTO extends NamedDTO {
 
     @NotNull
     private double fat;
@@ -20,5 +20,5 @@ public final class IngredientDTO extends NamedDTO {
     @NotNull
     private double servingSize;
 
-    public double calories;
+    private double calories;
 }

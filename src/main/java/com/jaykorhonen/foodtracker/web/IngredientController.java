@@ -1,14 +1,10 @@
 package com.jaykorhonen.foodtracker.web;
 
 import com.jaykorhonen.foodtracker.dto.IngredientDTO;
-import com.jaykorhonen.foodtracker.exceptions.IngredientAlreadyExistsException;
-import com.jaykorhonen.foodtracker.exceptions.IngredientNotFoundException;
 import com.jaykorhonen.foodtracker.service.IngredientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import javax.naming.directory.InvalidAttributeIdentifierException;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -26,7 +22,7 @@ public class IngredientController {
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    IngredientDTO create(@RequestBody @Valid IngredientDTO IngredientEntry) throws InvalidAttributeIdentifierException, IngredientAlreadyExistsException {
+    IngredientDTO create(@RequestBody @Valid IngredientDTO IngredientEntry) {
         return service.create(IngredientEntry);
     }
 
@@ -37,11 +33,13 @@ public class IngredientController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
     List<IngredientDTO> findAll() {
         return service.findAll();
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
     IngredientDTO findById(@PathVariable("id") Long id) {
         return service.findById(id);
     }

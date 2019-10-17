@@ -1,15 +1,13 @@
 package com.jaykorhonen.foodtracker.service;
 
 import com.jaykorhonen.foodtracker.dto.IngredientDTO;
-import com.jaykorhonen.foodtracker.dto.NamedDTO;
 import com.jaykorhonen.foodtracker.exceptions.IngredientAlreadyExistsException;
 import com.jaykorhonen.foodtracker.exceptions.IngredientNotFoundException;
+import com.jaykorhonen.foodtracker.exceptions.InvalidArgumentException;
 import com.jaykorhonen.foodtracker.model.Ingredient;
 import com.jaykorhonen.foodtracker.repository.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.naming.directory.InvalidAttributeIdentifierException;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -28,12 +26,12 @@ public class IngredientService implements NamedEntityService<IngredientDTO> {
     * Create ingredient, returns the saved ingredient
     * throws if ingredient already exists
     * */
-    public IngredientDTO create(IngredientDTO ingredient) throws IngredientAlreadyExistsException, InvalidAttributeIdentifierException {
+    public IngredientDTO create(IngredientDTO ingredient) throws RuntimeException {
 
         Ingredient existingIngredient;
 
         if(ingredient.getId() != null) {
-            throw new InvalidAttributeIdentifierException("Illegal attribute: id");
+            throw new InvalidArgumentException("id");
         }
 
         existingIngredient = ingredientRepository.findByName(ingredient.getName());
@@ -57,11 +55,9 @@ public class IngredientService implements NamedEntityService<IngredientDTO> {
     * Delete ingredient if it exists, return ingredient deleted
     * */
     public IngredientDTO delete(Long id) {
-        Ingredient ingredient = ingredientRepository.findById(id).orElse(null);
+        Ingredient ingredient = ingredientRepository.findById(id).orElse(new Ingredient());
 
-        if(ingredient != null) {
-            ingredientRepository.deleteById(id);
-        }
+        ingredientRepository.deleteById(id);
 
         return convertToDTO(ingredient);
     }
@@ -81,6 +77,10 @@ public class IngredientService implements NamedEntityService<IngredientDTO> {
     public IngredientDTO findById(Long id) {
         Ingredient ingredient = ingredientRepository.findById(id).orElse(null);
 
+        if(ingredient == null) {
+            throw new IngredientNotFoundException(id);
+        }
+
         return convertToDTO(ingredient);
     }
 
@@ -90,42 +90,31 @@ public class IngredientService implements NamedEntityService<IngredientDTO> {
     public IngredientDTO update(IngredientDTO ingredient) throws IngredientNotFoundException {
 
         Ingredient persistedIngredient;
+        Long id;
+        boolean hasId = ingredient.getId() != null;
+        boolean foundId = ingredientRepository.findIdByName(ingredient.getName()) != null;
 
-        Long id = ingredient.getId();
-        if(id != null) {
-
-            if(ingredientRepository.findById(id).orElse(null) == null) {
-                throw new IngredientNotFoundException(id);
-            }
-
-            persistedIngredient  = Ingredient.builder()
-                    .id(ingredient.getId())
-                    .name(ingredient.getName())
-                    .fat(ingredient.getFat())
-                    .carbs(ingredient.getCarbs())
-                    .protein(ingredient.getProtein())
-                    .servingSize(ingredient.getServingSize())
-                    .build();
-
-            persistedIngredient = ingredientRepository.save(persistedIngredient);
+        if (hasId) {
+            id = ingredient.getId();
+        } else if (foundId) {
+            id = ingredientRepository.findIdByName(ingredient.getName());
         } else {
-            Ingredient ingredientWithId = ingredientRepository.findByName(ingredient.getName());
-
-            if(ingredientWithId == null) {
-                throw new IngredientNotFoundException(ingredient.getName());
-            }
-
-            persistedIngredient  = Ingredient.builder()
-                    .id(ingredientWithId.getId())
-                    .name(ingredient.getName())
-                    .fat(ingredient.getFat())
-                    .carbs(ingredient.getCarbs())
-                    .protein(ingredient.getProtein())
-                    .servingSize(ingredient.getServingSize())
-                    .build();
-
-            persistedIngredient = ingredientRepository.save(persistedIngredient);
+            throw new IngredientNotFoundException(ingredient.getName());
         }
+
+        if (!ingredientRepository.findById(id).isPresent()) {
+            throw new IngredientNotFoundException(id);
+        }
+
+        persistedIngredient  = Ingredient.builder()
+                .id(id)
+                .name(ingredient.getName())
+                .fat(ingredient.getFat())
+                .carbs(ingredient.getCarbs())
+                .protein(ingredient.getProtein())
+                .servingSize(ingredient.getServingSize())
+                .build();
+
         persistedIngredient = ingredientRepository.save(persistedIngredient);
 
         return convertToDTO(persistedIngredient);
@@ -142,7 +131,11 @@ public class IngredientService implements NamedEntityService<IngredientDTO> {
     }
 
     public IngredientDTO deleteByName(String name) {
-        return null;
+        Ingredient ingredient = ingredientRepository.findByName(name);
+
+        ingredientRepository.deleteByName(name);
+
+        return convertToDTO(ingredient);
     }
 
     private IngredientDTO convertToDTO(Ingredient model) {

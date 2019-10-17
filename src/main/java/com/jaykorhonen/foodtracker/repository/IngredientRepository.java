@@ -13,6 +13,8 @@ public interface IngredientRepository extends MongoRepository<Ingredient, Long> 
 
     Ingredient findByName(@Param("name") String name);
 
+    Long findIdByName(@Param("name") String name);
+
     @Override
     Optional<Ingredient> findById(Long id);
 
@@ -26,6 +28,7 @@ public interface IngredientRepository extends MongoRepository<Ingredient, Long> 
     @Override
     boolean existsById(Long id);
 
-    @Override
     void deleteById(Long id);
+
+    void deleteByName(@Param("name") String name);
 }
