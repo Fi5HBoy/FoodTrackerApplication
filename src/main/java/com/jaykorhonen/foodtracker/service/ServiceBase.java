@@ -11,11 +11,11 @@ public interface ServiceBase<T extends DTOBase, E extends EntityBase> {
 
     T create(T dto) throws RuntimeException;
 
-    T delete(Long id);
+    T delete(String id);
 
     List<T> findAll();
 
-    T findById(Long id);
+    T findById(String id);
 
     T update(T dto) throws RuntimeException;
 }

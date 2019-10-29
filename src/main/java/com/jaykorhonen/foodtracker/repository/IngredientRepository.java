@@ -9,14 +9,12 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 import java.util.Optional;
 
-public interface IngredientRepository extends MongoRepository<Ingredient, Long> {
+public interface IngredientRepository extends MongoRepository<Ingredient, String> {
 
     Ingredient findByName(@Param("name") String name);
 
-    Long findIdByName(@Param("name") String name);
-
     @Override
-    Optional<Ingredient> findById(Long id);
+    Optional<Ingredient> findById(String id);
 
     List<Ingredient> findAll();
 
@@ -26,9 +24,9 @@ public interface IngredientRepository extends MongoRepository<Ingredient, Long> 
     <I extends Ingredient> I save(I saved);
 
     @Override
-    boolean existsById(Long id);
+    boolean existsById(String id);
 
-    void deleteById(Long id);
+    void deleteById(String id);
 
     void deleteByName(@Param("name") String name);
 }

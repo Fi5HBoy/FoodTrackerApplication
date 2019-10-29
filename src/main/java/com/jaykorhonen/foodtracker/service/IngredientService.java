@@ -54,7 +54,7 @@ public class IngredientService implements NamedEntityService<IngredientDTO> {
     /*
     * Delete ingredient if it exists, return ingredient deleted
     * */
-    public IngredientDTO delete(Long id) {
+    public IngredientDTO delete(String id) {
         Ingredient ingredient = ingredientRepository.findById(id).orElse(new Ingredient());
 
         ingredientRepository.deleteById(id);
@@ -74,7 +74,7 @@ public class IngredientService implements NamedEntityService<IngredientDTO> {
     /*
     * Return ingredient with given id
     * */
-    public IngredientDTO findById(Long id) {
+    public IngredientDTO findById(String id) {
         Ingredient ingredient = ingredientRepository.findById(id).orElse(null);
 
         if(ingredient == null) {
@@ -90,14 +90,14 @@ public class IngredientService implements NamedEntityService<IngredientDTO> {
     public IngredientDTO update(IngredientDTO ingredient) throws IngredientNotFoundException {
 
         Ingredient persistedIngredient;
-        Long id;
-        boolean hasId = ingredient.getId() != null;
-        boolean foundId = ingredientRepository.findIdByName(ingredient.getName()) != null;
+        String id;
+        String entryId = ingredient.getId();
+        String idByName = ingredientRepository.findByName(ingredient.getName()).getId();
 
-        if (hasId) {
+        if (entryId != null) {
             id = ingredient.getId();
-        } else if (foundId) {
-            id = ingredientRepository.findIdByName(ingredient.getName());
+        } else if (idByName != null) {
+            id = idByName;
         } else {
             throw new IngredientNotFoundException(ingredient.getName());
         }
