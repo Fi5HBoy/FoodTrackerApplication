@@ -1,18 +1,21 @@
 package com.jaykorhonen.foodtracker.service;
 
-import com.jaykorhonen.foodtracker.dto.IngredientDTO;
+import com.jaykorhonen.foodtracker.dto.DTOBase;
+import com.jaykorhonen.foodtracker.exceptions.IngredientAlreadyExistsException;
+import com.jaykorhonen.foodtracker.model.EntityBase;
 
+import javax.naming.directory.InvalidAttributeIdentifierException;
 import java.util.List;
 
-public interface ServiceBase {
+public interface ServiceBase<T extends DTOBase, E extends EntityBase> {
 
-    IngredientDTO create(IngredientDTO ingredientDTO);
+    T create(T dto) throws RuntimeException;
 
-    IngredientDTO delete(String id);
+    T delete(String id);
 
-    List<IngredientDTO> findAll();
+    List<T> findAll();
 
-    IngredientDTO findById(String id);
+    T findById(String id);
 
-    IngredientDTO update(IngredientDTO ingredientDTO);
+    T update(T dto) throws RuntimeException;
 }

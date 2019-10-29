@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @Data
-abstract class NamedDTO extends DTOBase {
+public abstract class NamedDTO extends DTOBase {
 
     @NotNull
     private String name;
